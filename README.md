@@ -38,3 +38,33 @@ This project implements forward and inverse kinematics for a 4-DOF robotic arm u
 1. Clone the repository:
    ```sh
    git clone https://github.com/emmanueludehchukwudi/robot-arm-kinematics.git
+
+2. Navigate to the project directory:
+   ```sh
+   cd Robot-Arm-Kinematics
+   
+3. Install Dependencies:
+    ```sh
+    pip install numpy
+### Configuration
+You can modify the following parameters in the scripts:
+
+Link lengths (a1, a2, a3)
+Initial joint angles (T1, T2, T3, T4 in forward_kinematics.py)
+Desired end-effector position (x, y, z in inverse_kinematics.py)
+
+### Contributions
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature-branch).
+3. Make your changes.
+4. Commit your changes (git commit -m 'Add some feature').
+5. Push to the branch (git push origin feature-branch).
+6. Open a pull request.
+
+## Acknowledgements
+
+- [NumPy](https://numpy.org/) for providing the numerical computation tools.
+
+
