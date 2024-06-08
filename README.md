@@ -1,8 +1,8 @@
 # Robotic Arm Kinematics
 
-[![License](https://img.shields.io/github/license/emmanueludehchukwudi/robot-arm-kinematics)](LICENSE)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/emmanueludehchukwudi/robot-arm-kinematics/ci.yml?branch=main)](https://github.com/emmanueludehchukwudi/robot-arm-kinematics/actions)
-[![Version](https://img.shields.io/github/v/release/emmanueludehchukwudi/robot-arm-kinematics)](https://github.com/emmanueludehchukwudi/robot-arm-kinematics/releases)
+[![License](https://img.shields.io/github/license/emmanueludehchukwudi/Robot-Arm-Kinematics)](LICENSE)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/emmanueludehchukwudi/Robot-Arm-Kinematics/ci.yml?branch=main)](https://github.com/emmanueludehchukwudi/Robot-Arm-Kinematics/actions)
+[![Version](https://img.shields.io/github/v/release/emmanueludehchukwudi/Robot-Arm-Kinematics)](https://github.com/emmanueludehchukwudi/Robot-Arm-Kinematics/releases)
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ This project implements forward and inverse kinematics for a 4-DOF robotic arm u
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/emmanueludehchukwudi/robot-arm-kinematics.git
+   git clone https://github.com/emmanueludehchukwudi/Robot-Arm-Kinematics.git
 
 2. Navigate to the project directory:
    ```sh
