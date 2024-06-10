@@ -2,13 +2,13 @@ import numpy as np
 from math import cos, sin
 
 # dummy link lenghts
-a1 = 1.0
-a2 = 1.0
-a3 = 1.0
+a1 = 14.0
+a2 = 10.5
+a3 = 19.0
 
 #set intial joint angles to zero
-T1 = np.deg2rad(0)
-T2 = np.deg2rad(0)
+T1 = np.deg2rad(-90)
+T2 = np.deg2rad(17)
 T3 = np.deg2rad(0)
 T4 = np.deg2rad(0)
 
