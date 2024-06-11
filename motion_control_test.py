@@ -28,8 +28,7 @@ r = sqrt(r1**2 + r2**2)
 alpha = atan2(r2, r1)
 beta = acos((a2**2 + r**2 - a3**2) / (2 * a2 * r))
 theta2 = alpha - beta
-if theta2 < 0:
-    theta2 = alpha + beta
+
 phi = acos((a2**2 + a3**2 - r**2) / (2 * a2 * a3))
 theta3 = phi - np.pi / 2
 

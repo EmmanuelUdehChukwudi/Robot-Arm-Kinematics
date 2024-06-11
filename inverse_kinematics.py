@@ -8,9 +8,9 @@ a1 = 14.0
 a2 = 10.5
 a3 = 19.0
 
-x = 0
-y = -4.174
-z = 35.303
+x = 10.0
+y = 10.0
+z = 20
 
 max_pos = a1+a2+a3
 if sqrt(x**2 + y**2 + z**2) > max_pos:
@@ -24,8 +24,6 @@ r = sqrt(r1**2 + r2**2)
 alpha = atan2(r2,r1)
 beta = acos((a2**2 +r**2 - a3**2)/(2*a2*r))
 theta2 = (alpha - beta)
-if theta2 < 0:
-     theta2 = alpha + beta
 phi = acos((a2**2 +a3**2 - r**2)/(2*a2*a3))
 
 theta3 = phi - np.pi/2
