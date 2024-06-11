@@ -7,9 +7,9 @@ a2 = 10.5
 a3 = 19.0
 
 #set intial joint angles to zero
-T1 = np.deg2rad(-90)
-T2 = np.deg2rad(17)
-T3 = np.deg2rad(0)
+T1 = np.deg2rad(78)
+T2 = np.deg2rad(18)
+T3 = np.deg2rad(28)
 T4 = np.deg2rad(0)
 
 #Denavit-Hartenburg table
@@ -43,9 +43,9 @@ def return_end_effector_position():
     H0_4 = np.dot(H0_3,H3_4)
     end_effector_postion = H0_4[:3,-1]
     end_effector_oreintation = H0_4[:3,:3]
-    x = end_effector_postion[0]
-    y = end_effector_postion[1]
-    z = end_effector_postion[2]
+    x = round(end_effector_postion[0],2)
+    y = round(end_effector_postion[1],2)
+    z = round(end_effector_postion[2],2)
     return (x,y,z)
 
-print(return_end_effector_position())
+# print(return_end_effector_position())
