@@ -7,10 +7,10 @@ a2 = 10.5
 a3 = 19.0
 
 #set intial joint angles to zero
-T1 = np.deg2rad(34)
-T2 = np.deg2rad(34)
-T3 = np.deg2rad(34)
-T4 = np.deg2rad(34)
+T1 = np.deg2rad(73)
+T2 = np.deg2rad(179)
+T3 = np.deg2rad(28)
+T4 = np.deg2rad(0)
 
 #Denavit-Hartenburg table
 DH = np.array([[T1, np.pi/2, 0.0, a1],

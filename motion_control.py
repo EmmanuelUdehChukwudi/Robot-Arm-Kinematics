@@ -3,6 +3,7 @@ import serial
 import time
 from forward_kinematics import get_homogeneous_transform
 import sys
+
 a1 = 14.0
 a2 = 10.5
 a3 = 19.0
@@ -24,24 +25,24 @@ def inverse_kinematics(x, y, z):
     phi = np.arccos((a2**2 + a3**2 - r**2) / (2 * a2 * a3))
     theta3 = phi - np.pi / 2
     DH = np.array([[theta1, np.pi/2, 0.0, a1],
-               [theta2, np.pi, a2, 0.0],
-               [theta3, np.pi/2, 0.0, 0.0],
-               ], dtype=np.float32)
-    R0_4 = [[0,0,0],
-            [0,0,0],
-            [0,0,0]]
-    R0_1 = get_homogeneous_transform(theta=DH[0][0], alpha=DH[0][1], r=DH[0][2], d=DH[0][3])[:3,:3]
-    R1_2 = get_homogeneous_transform(theta=DH[1][0], alpha=DH[1][1], r=DH[1][2], d=DH[1][3])[:3,:3]
-    R2_3 = get_homogeneous_transform(theta=DH[2][0], alpha=DH[2][1], r=DH[2][2], d=DH[2][3])[:3,:3]
-    
-    R0_3 = np.dot(np.dot(R0_1,R1_2),R2_3)
-    R0_3_inv = np.transpose(R0_3)
-    R3_4 = np.dot(R0_3_inv,R0_4)
+                   [theta2, np.pi, a2, 0.0],
+                   [theta3, np.pi/2, 0.0, 0.0],
+                   ], dtype=np.float32)
+    R0_4 = [[0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]]
+    R0_1 = get_homogeneous_transform(theta=DH[0][0], alpha=DH[0][1], r=DH[0][2], d=DH[0][3])[:3, :3]
+    R1_2 = get_homogeneous_transform(theta=DH[1][0], alpha=DH[1][1], r=DH[1][2], d=DH[1][3])[:3, :3]
+    R2_3 = get_homogeneous_transform(theta=DH[2][0], alpha=DH[2][1], r=DH[2][2], d=DH[2][3])[:3, :3]
 
-    theta4 = np.arctan2(R3_4[1][0],R3_4[0][0])
-    
-    
+    R0_3 = np.dot(np.dot(R0_1, R1_2), R2_3)
+    R0_3_inv = np.transpose(R0_3)
+    R3_4 = np.dot(R0_3_inv, R0_4)
+
+    theta4 = np.arctan2(R3_4[1][0], R3_4[0][0])
+
     return [int(np.rad2deg(theta1)), int(np.rad2deg(theta2)), int(np.rad2deg(theta3)), int(np.rad2deg(theta4))]
+
 
 def get_current_positions(serial_connection):
     serial_connection.write(b'?')
@@ -66,7 +67,7 @@ def send_incremental_angles(serial_connection, current_positions, target_positio
     steps = int(max(abs(target_positions[i] - current_positions[i]) // step_size for i in range(len(current_positions))))
     print("Steps:", steps)
     if steps == 0:
-        print("Robot already at starting postion")
+        print("Robot already at starting position")
     for step in range(steps + 1):
         incremental_angles = [
             int(current_positions[i] + (target_positions[i] - current_positions[i]) * step / steps)
@@ -74,7 +75,22 @@ def send_incremental_angles(serial_connection, current_positions, target_positio
         ]
         send_angles(serial_connection, incremental_angles)
         time.sleep(0.1)
-        
+
+
+def modify_angles(angles):
+    theta1, theta2, theta3, theta4 = angles
+    if theta1 < 0:
+        theta1 = 180 + theta1
+    if theta2 < 0:
+        theta2 = 180 + theta2
+    if theta3 < 0:
+        theta3 = 180 + theta3
+    if theta4 < 0:
+        theta4 = 180 + theta4
+
+    return [theta1, theta2, theta3, theta4]
+
+
 def main():
     try:
         port = input("Enter the serial port: ")
@@ -95,15 +111,17 @@ def main():
                 print("Target position is out of reach.")
                 continue
             target_positions = inverse_kinematics(x, y, z)
+            old = target_positions
             print(f"Target positions: {target_positions}")
+            for i in target_positions:
+                if i < 0:
+                    print("Cannot send command to robot because one or more of the joints is negative. Finding alternate solutions.....")
+                    new = modify_angles(old)
+                    send_incremental_angles(ser, current_positions, new)
+                    break
+            else:
+                send_incremental_angles(ser, current_positions, target_positions)
 
-            for val in target_positions:
-                if val < 0:
-                    print("Cannot send command to robot because one of the joints is negative")
-                    ser.close()
-                    sys.exit()
-
-            send_incremental_angles(ser, current_positions, target_positions)
             choice = input("Do you want to enter new coordinates? (yes/no): ").lower()
             if choice != 'yes':
                 break
