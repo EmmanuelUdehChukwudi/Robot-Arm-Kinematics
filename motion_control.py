@@ -119,6 +119,8 @@ def main():
                     new = modify_angles(old)
                     send_incremental_angles(ser, current_positions, new)
                     break
+                    # ser.close()
+                    # sys.exit()
             else:
                 send_incremental_angles(ser, current_positions, target_positions)
 

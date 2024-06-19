@@ -7,9 +7,9 @@
 #define WRIST_TWIST_PIN 3
 #define TOOL_PIN 5
 
-#define WAIST_HOME 161
-#define SHOULDER_HOME 147
-#define ELBOW_HOME 120
+#define WAIST_HOME 0
+#define SHOULDER_HOME 90
+#define ELBOW_HOME 0
 #define WRIST_HOME 0
 #define WRIST_TWIST_HOME 0
 #define TOOL_TIP_HOME 35

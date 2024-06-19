@@ -68,9 +68,9 @@ class RobotGUI(QWidget):
             spinbox.setSingleStep(1)
             spinbox.valueChanged.connect(self.update_position)
 
-        self.T1_spinbox.setValue(45)
-        self.T2_spinbox.setValue(60)
-        self.T3_spinbox.setValue(67)
+        self.T1_spinbox.setValue(0)
+        self.T2_spinbox.setValue(0)
+        self.T3_spinbox.setValue(0)
         self.T4_spinbox.setValue(0)
 
         layout = QVBoxLayout()
